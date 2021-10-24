@@ -1,0 +1,26 @@
+2020csb1129 - Sukhmeet Singh
+2020csb1121 - Sanganwar Sourabh 
+
+
+1) Image  Filters(black and white/inversion)and Edge detection
+    a)Overall Objective
+        To implement Filters and edge  detection algorithm.
+    b)It will be implemented in verilog
+    c)Functionality
+        It will take the image data input and output an image with only edges. Filters are useful to beautify images and even find different contrast.
+
+2) K-map(upto 4 variables)  teaching aid
+    a)Overall Objective
+        To implement a boolean equation minimiser using K-map 
+    b)It will be implemented in c++
+    c)Functionality 
+        it will take a boolean expression as input and output a minimised expression by K-map 
+
+3) Randomized encryption implementation
+    a)Overall Objective
+        To implement an encryption algorithm using 2  random numbers.
+    b)It will be implemented in verilog
+    c)Functionality
+        The program will have two main functions
+          First will be implementing a random number generator and an encryption decryption system using the random number generator.The program will encrypt the given data by the user using random number generators and also decrypt the encrypted data.
+          Second will generate a secure password using the random number generator designed above.
