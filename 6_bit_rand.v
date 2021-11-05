@@ -1,5 +1,5 @@
-module 6_bit_rand RAND1(Clk,6_rand);
-    input Clk;
-    output [5:0]6_rand;
-    reg [5:0]6_rand;
+module bit_rand_6 RAND1(rand_6);
+    output [5:0]rand_6;
+    reg [5:0]rand_6;
+    
 endmodule
