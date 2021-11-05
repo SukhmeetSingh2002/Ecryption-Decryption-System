@@ -14,8 +14,8 @@ module Solver (Clk,data_1_80,data_2_96,work_2,output_1_96,output_2_80);
         if(work_2==2'b00)
             Encrypter ENC(.Clk(Clk),.data_to_be_encrpt(data_1_80),.output_encrypted(output_1_96));
         else if(work_2==2'b01)
-            Decrypter DEC(/*tobe done*/)
+            Decrypter DEC(/*tobe done*/);
         else if(work_2==2'b10)
-            Password_Gen PASSGEN(.Clk(Clk),.output_2_80(output_2_80))
+            Password_Gen PASSGEN(.Clk(Clk),.output_2_80(output_2_80));
     end
 endmodule
