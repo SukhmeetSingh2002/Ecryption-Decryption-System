@@ -1,11 +1,12 @@
-module decrypt_function_2 (Clk,data_1,outEnc);
+module decrypt_function_2 (Clk,data_1,outDec);
     input Clk;
     input [77:0]data_1;
     reg  [10:0]rand_9;
-    output outEnc;
-    reg outEnc;
+    output [60:0]outDec;
+    reg [60:0]outDec;
     reg [59:0]b;
     reg [60:0]y;
+    reg [60:0]x;
     always @(data_1) begin
         rand_9=data_1[67:77];
         b[0:10]=rand_9;
@@ -15,7 +16,8 @@ module decrypt_function_2 (Clk,data_1,outEnc);
         b[44:54]=rand_9;
         b[55:59]=rand_9[0:4];
         y=data_1[6:66];
-        outEnc=y-x;
+        x=y-b;
+        outDec=x[1:60];
     end
 endmodule
 
