@@ -1,5 +1,3 @@
-
-
 module Password_Gen(Clk,output_2_80);
     input Clk;
     output [59:0] output_2_80;

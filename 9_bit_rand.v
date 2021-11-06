@@ -1,5 +1,5 @@
-module bit_rand_9 (rand_9);
-    output [8:0]rand_6;
-    reg [8:0]rand_6;
+module bit_rand_11 (rand_11);
+    output [10:0]rand_11;
+    reg [10:0]rand_11;
     
 endmodule
