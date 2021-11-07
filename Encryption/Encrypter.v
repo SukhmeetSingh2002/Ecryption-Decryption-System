@@ -2,10 +2,10 @@ module Encrypter (Clk,data_to_be_encrpt,output_encrypted);
     input Clk;
     input [59:0] data_to_be_encrpt;
     output [77:0] output_encrypted;
-    reg [77:0] output_encrypted_INTERNAL_1;
-    reg [77:0] output_encrypted_INTERNAL_2;
-    reg [77:0] output_encrypted_INTERNAL_3;
-    reg [77:0] output_encrypted_INTERNAL_4;
+    wire [77:0] output_encrypted_INTERNAL_1;
+    wire [77:0] output_encrypted_INTERNAL_2;
+    wire [77:0] output_encrypted_INTERNAL_3;
+    wire [77:0] output_encrypted_INTERNAL_4;
     reg [5:0] Random_6;
     reg [10:0] Random_11;
 
