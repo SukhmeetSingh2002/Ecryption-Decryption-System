@@ -1,4 +1,4 @@
-module decrypt_function_1 (Clk,data_1,outEnc,rand_11,rand_6);
+module encrypt_function_1 (Clk,data_1,outEnc,rand_11,rand_6);
     input Clk;
     input [59:0]data_1;
     input [10:0]rand_11;

@@ -6,8 +6,8 @@ module Encrypter (Clk,data_to_be_encrpt,output_encrypted);
     wire [77:0] output_encrypted_INTERNAL_2;
     wire [77:0] output_encrypted_INTERNAL_3;
     wire [77:0] output_encrypted_INTERNAL_4;
-    reg [5:0] Random_6;
-    reg [10:0] Random_11;
+    wire [5:0] Random_6;
+    wire [10:0] Random_11;
 
     bit_rand_6 RAND6((Random_6));
     bit_rand_11 RAND11((Random_11));
