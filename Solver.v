@@ -12,7 +12,7 @@ module Solver (Clk,data_1_80,data_2_96,work_2,output_1_96,output_2_80);
     reg [59:0] output_2_80;
 
     Encrypter ENC(.Clk(Clk),.data_to_be_encrpt(data_1_80),.output_encrypted(output_1_96_ENC_INTERNAL));
-    Decrypter DEC(/*tobe done*/);
+    Decrypter DEC(Clk,data_2_96,output_2_80_DEC_INTERNAL);
     Password_Gen PASSGEN(.Clk(Clk),.output_2_80(output_2_80_PASS_INTERNAL));
 
     always @(posedge Clk) 
