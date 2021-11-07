@@ -8,16 +8,16 @@ module decrypt_function_4 (Clk,data_1,outDec);
     reg [60:0]y;
     reg [60:0]x;
     always @(data_1) begin
-        rand_9=data_1[67:77];
-        b[0:4]=rand_9[0:4];
-        b[5:15]=~rand_9;
-        b[16:26]=~rand_9;
-        b[27:37]=rand_9;
-        b[38:48]=~rand_9;
-        b[49:59]=rand_9;
-        y=data_1[6:66];
+        rand_9=data_1[77:67];
+        b[10:0]=rand_9;
+        b[21:11]=~rand_9;
+        b[32:22]=~rand_9;
+        b[43:33]=rand_9;
+        b[54:44]=~rand_9;
+        b[59:55]=rand_9[4:0];
+        y=data_1[66:6];
         x=y-b;
-        outDec=x[1:60];
+        outDec=x[60:1];
     end
 endmodule
 
