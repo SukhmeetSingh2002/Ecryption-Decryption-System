@@ -3,8 +3,6 @@ module encrypt_function_3 (Clk,data_1,outEnc,rand_11,rand_6);
     input [59:0]data_1;
     input [10:0]rand_11;
     input [5:0]rand_6;
-    reg [5:0]rand_6;
-    reg  [10:0]rand_11;
     output [77:0]outEnc;
     reg [77:0]outEnc;
     reg [59:0]b;

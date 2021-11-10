@@ -2,10 +2,10 @@ module Password_Gen(Clk,output_2_80);
     input Clk;
     output [59:0] output_2_80;
     reg [59:0] output_2_80;
-    reg [59:0] output_2_80_INTERNAL_1;
-    reg [59:0] output_2_80_INTERNAL_2;
-    reg [59:0] output_2_80_INTERNAL_3;
-    reg [59:0] output_2_80_INTERNAL_4;
+    wire [59:0] output_2_80_INTERNAL_1;
+    wire [59:0] output_2_80_INTERNAL_2;
+    wire [59:0] output_2_80_INTERNAL_3;
+    wire [59:0] output_2_80_INTERNAL_4;
     wire [5:0] Random_6;
 
     bit_rand_6 RAND_1((Random_6));

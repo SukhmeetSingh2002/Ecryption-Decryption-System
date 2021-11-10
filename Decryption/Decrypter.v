@@ -2,6 +2,7 @@ module Decrypter (Clk,data_to_be_decrypt,output_decrypted);
     input Clk;
     input [77:0] data_to_be_decrypt;
     output [59:0] output_decrypted;
+    reg [59:0] output_decrypted;
     wire [59:0] output_decrypted_INTERNAL_1;
     wire [59:0] output_decrypted_INTERNAL_2;
     wire [59:0] output_decrypted_INTERNAL_3;

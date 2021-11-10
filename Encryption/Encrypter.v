@@ -2,6 +2,7 @@ module Encrypter (Clk,data_to_be_encrpt,output_encrypted);
     input Clk;
     input [59:0] data_to_be_encrpt;
     output [77:0] output_encrypted;
+    reg [77:0] output_encrypted;
     wire [77:0] output_encrypted_INTERNAL_1;
     wire [77:0] output_encrypted_INTERNAL_2;
     wire [77:0] output_encrypted_INTERNAL_3;
@@ -19,13 +20,13 @@ module Encrypter (Clk,data_to_be_encrpt,output_encrypted);
 
     always @(posedge Clk) 
     begin    
-        if(/*Something*/)
+        if(Random_6<16)
             output_encrypted=output_encrypted_INTERNAL_1;
-        else if(/*Something*/)
+        else if(Random_6<32)
             output_encrypted=output_encrypted_INTERNAL_2;
-        else if(/*Something*/)
+        else if(Random_6<48)
             output_encrypted=output_encrypted_INTERNAL_3;
-        else if(/*Something*/)
+        else if(Random_6<64)
             output_encrypted=output_encrypted_INTERNAL_4;
 
     end

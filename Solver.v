@@ -5,9 +5,9 @@ module Solver (Clk,data_1_80,data_2_96,work_2,output_1_96,output_2_80);
     input [1:0] work_2;
     output [77:0] output_1_96;
     output [59:0] output_2_80;
-    reg [77:0] output_1_96_ENC_INTERNAL;
-    reg [77:0] output_2_80_DEC_INTERNAL;
-    reg [59:0] output_2_80_PASS_INTERNAL;
+    wire  [77:0] output_1_96_ENC_INTERNAL;
+    wire [59:0] output_2_80_DEC_INTERNAL;
+    wire [59:0] output_2_80_PASS_INTERNAL;
     reg [77:0] output_1_96;
     reg [59:0] output_2_80;
 
