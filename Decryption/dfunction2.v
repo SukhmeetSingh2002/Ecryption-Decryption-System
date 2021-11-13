@@ -17,7 +17,7 @@ module decrypt_function_2 (Clk,data_1,outDec);
         b[59:55]=rand_9[4:0];
         y=data_1[66:6];
         x=y-b;
-        outDec=x[60:1];
+        outDec=x[59:0];
     end
 endmodule
 
