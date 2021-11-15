@@ -57,6 +57,7 @@ module TestBench ();
           end
           #10 $finish;
         $fclose(fd);  
+        $fclose(fw);  
     end
     initial begin
         Clk=1'b0;
