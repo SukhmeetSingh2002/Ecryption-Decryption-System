@@ -1,4 +1,4 @@
 *.out
 *.vcd
-./my_file.txt
-./out_file.txt
+my_file.txt
+out_file.txt
