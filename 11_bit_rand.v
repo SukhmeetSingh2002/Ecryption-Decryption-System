@@ -22,7 +22,7 @@ module bit_rand_11 (rand_11);
         ans = $fscanf(fd, "%b\n",rand_11);
         $fclose(fd);  
 
-        #100
+        #35
         // saving final value 
         fd = $fopen("seed_11.txt", "w");
         $fdisplay(fd,"%b",rand_11);

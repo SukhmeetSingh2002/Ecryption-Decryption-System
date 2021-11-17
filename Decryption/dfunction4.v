@@ -7,7 +7,7 @@ module decrypt_function_4 (Clk,data_1,outDec);
     reg [59:0]b;
     reg [60:0]y;
     reg [60:0]x;
-    always @(data_1) begin
+    always @(posedge Clk) begin
         rand_9=data_1[77:67];
         b[10:0]=rand_9;
         b[21:11]=~rand_9;

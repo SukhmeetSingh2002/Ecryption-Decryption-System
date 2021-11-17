@@ -1,4 +1,7 @@
 import os
+import time
+
+os.popen("iverilog.exe TestBench.v")
 
 def convert(x):
     if(ord(x)>=65 and ord(x)<=90):
@@ -44,9 +47,9 @@ def TakeFileInput():
     inputFilePath=input("Enter input file path: ")
     with open(inputFilePath, "r") as inputDataFile:
         dataAsString=inputDataFile.read()
-        dataAsString=dataAsString.replace("\n","____")
-        dataAsString=dataAsString.replace(".", "___")
-        dataAsString=dataAsString.replace(",", "____")
+        dataAsString=dataAsString.replace("\n","__________")
+        dataAsString=dataAsString.replace(".", "_________")
+        dataAsString=dataAsString.replace(",", "________")
         dataAsList=splitData(dataAsString)
         dataAsList=[convertWordToBinary(x) for x in dataAsList]
     with open("my_file.txt", "w") as inputDataFile:
@@ -77,7 +80,7 @@ def OutputFile(TypeOfOp):
         if TypeOfOp==0:
             for i in dataAsBinary:
                 if i!='\n':
-                    for j in range(10):
+                    for j in range(13):
                         c=c.append(list(converted(int(i[6*j:6*j+6],2))))
                 else:
                     c=c+list("\n")
@@ -99,74 +102,91 @@ def OutputFile(TypeOfOp):
                 else:
                     newc.append(c[x])
             with open("new.txt", "w") as fout:
-                fout.write("output\n")
                 for x in range(len(newc)):
                     fout.write(newc[x])
             ans=""
             with open("new.txt", "r") as fout:
                 ans=fout.read()
-            ans.replace("____","\n")
-            ans.replace("___",".")
-            ans.replace("____",",")
+            ans.replace("__________","\n")
+            ans.replace("_________",".")
+            ans.replace("________",",")
             with open("new.txt", "w") as fout:
                 fout.write(ans)
 
-x=int(input("Press 1 if you know number of operations to be done else press 2 if you dont know number of operations"))
+def out_tex():
+    with open("out_file.txt", "r") as file:
+        with open("my_file.txt", "r") as y:
+            n=int(y.readline())
+            print(n)
+            for i in range(n):
+                w=int(y.readline())
+                print(w)
+                if w == 0:
+                    u=y.readline()
+                    i=file.readline()
+                    c=""
+                    k=""
+                    for j in range(13):
+                        c=c+converted(int(i[6*j:6*j+6],2))
+                    for j in range(10):
+                        k=k+converted(int(u[6*j:6*j+6],2))
+                    print(f"initial password {k} encrypted password {c}")
+                elif w == 1:
+                    u=y.readline()
+                    i=file.readline()
+                    c=""
+                    k=""
+                    for j in range(10):
+                        c=c+converted(int(i[6*j:6*j+6],2))
+                    for j in range(13):
+                        k=k+converted(int(u[6*j:6*j+6],2))
+                    print(f"given password is {k} and its decrypted password is {c}")
+                elif w == 2:
+                    i=file.readline()
+                    c=""
+                    for j in range(10):
+                        c=c+converted(int(i[6*j:6*j+6],2))
+                    print(f"passowrd generated is : {c}")
+
+x=int(input("Welcome\nMenu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt some passwords and generate some passwords of length upto 10"))
 if(x==1):
+    TakeFileInput()
+    os.popen("vvp.exe a.out")
+    OutputFile(0)
+elif(x==2):
+    TakeFileInputDec()
+    os.popen("vvp.exe a.out")
+    OutputFile(1)
+elif(x==3):
     try:
         q=int(input("Enter number of operations: "))
     except:
         q=-1
     if(q!=-1):
         with open("my_file.txt", "w") as file:
-            file.write(q)
+            file.write(str(q))
             file.write("\n")
             for i in range(q):
-                t=input("Enter {}th password max characters = 10: ".format(i))
-                r=""
-                for x in t:
-                    r=r+convert(x)
-                r="0"*(60-len(r))+r
-                file.write(r)
-                file.write("\n")
-elif(x==2):
-    print("Enter any character to stop taking input")
+                t=int(input("Select from following options:\n1: encrypt your password.(upto 10 characters)\n2: Decrypt your encrypted password.\n3: Generate a password "))
+                file.write(f"{t-1}\n")
+                if(t==1):
+                    t=input("Enter your password: ")
+                    r=""
+                    for x in t:
+                        r=r+convert(x)
+                    r="0"*(60-len(r))+r
+                    file.write(r)
+                    file.write("\n")
+                if(t==2):
+                    t=input("Enter your password: ")
+                    r=""
+                    for x in t:
+                        r=r+convert(x)
+                    r="0"*(60-len(r))+r
+                    file.write(r)
+                    file.write("\n")    
+        os.popen("vvp.exe a.out")
+        time.sleep(1)
+        out_tex()
 else:
     print("Invalid Input")
-
-os.popen("vvp.exe a.out")
-#OUTPUT
-with open("out_file.txt", "r") as file:
-    with open("my_file.txt", "r") as y:
-        n=int(y.readline())
-        n=int(y.readline())
-        print(n)
-        for i in range(n):
-            w=int(y.readline())
-            print(w)
-            if w == 0:
-                u=y.readline()
-                i=file.readline()
-                c=""
-                k=""
-                for j in range(12):
-                    c=c+converted(int(i[6*j:6*j+6],2))
-                for j in range(10):
-                    k=k+converted(int(u[6*j:6*j+6],2))
-                print(f"initial password {k} encrypted password {c}")
-            elif w == 1:
-                u=y.readline()
-                i=file.readline()
-                c=""
-                k=""
-                for j in range(10):
-                    c=c+converted(int(i[6*j:6*j+6],2))
-                for j in range(12):
-                    k=k+converted(int(u[6*j:6*j+6],2))
-                print(f"given password is {k} and its decrypted password is {c}")
-            elif w == 2:
-                i=file.readline()
-                c=""
-                for j in range(10):
-                    c=c+converted(int(i[6*j:6*j+6],2))
-                print(f"passowrd generated is : {c}")
