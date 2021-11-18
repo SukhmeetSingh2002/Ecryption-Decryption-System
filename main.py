@@ -44,8 +44,7 @@ def splitData(dataString,lenWord=10):
         dataString=dataString[lenWord:]
     return dataAsList
 
-def TakeFileInput():
-    inputFilePath=input("Enter input file path: ")
+def TakeFileInput(inputFilePath):
     with open(inputFilePath, "r") as inputDataFile:
         dataAsString=inputDataFile.read()
         dataAsString=dataAsString.replace("\n","__________")
@@ -59,8 +58,7 @@ def TakeFileInput():
         for x in dataAsList:
             inputDataFile.write(f"0\n{x}\n")
 
-def TakeFileInputDec():
-    inputFilePath=input("Enter path of file to be decrypted: ")
+def TakeFileInputDec(inputFilePath):
     with open(inputFilePath, "r") as inputDataFile:
         dataAsList = []
         dataAsString=inputDataFile.read()
@@ -75,7 +73,7 @@ def TakeFileInputDec():
         for x in dataAsList:
             inputDataFile.write(f"1\n{x}\n")
 
-def OutputFile(TypeOfOp):
+def OutputFile(TypeOfOp,outFileName):
     with open("out_file.txt", "r") as f:
         dataAsBinary=f.readlines()
         c=[]
@@ -86,7 +84,7 @@ def OutputFile(TypeOfOp):
                         c.append((converted(int(i[6*j:6*j+6],2))))
                 else:
                     c=c+list("\n")
-            with open("new.txt", "w") as fout:
+            with open(outFileName, "w") as fout:
                 fout.writelines(c)
 
         elif TypeOfOp==1:
@@ -99,20 +97,17 @@ def OutputFile(TypeOfOp):
                     c=c+list("\n")
             newc=[]
             for x in range(len(c)):
-                if x>0 and c[x]==' ' and c[x-1]==' ':
-                    pass
-                else:
-                    newc.append(c[x])
-            with open("new.txt", "w") as fout:
+                newc.append(c[x])
+            with open(outFileName, "w") as fout:
                 for x in range(len(newc)):
                     fout.write(newc[x])
             ans=""
-            with open("new.txt", "r") as fout:
+            with open(outFileName, "r") as fout:
                 ans=fout.read()
-            ans.replace("__________","\n")
-            ans.replace("0_00_0_0_0",".")
-            ans.replace("7__77_7_77",",")
-            with open("new.txt", "w") as fout:
+            ans=ans.replace("__________","\n")
+            ans=ans.replace("0_00_0_0_0",".")
+            ans=ans.replace("7__77_7_77",",")
+            with open(outFileName, "w") as fout:
                 fout.write(ans)
 
 def out_tex():
@@ -130,7 +125,7 @@ def out_tex():
                         c=c+converted(int(i[6*j:6*j+6],2))
                     for j in range(10):
                         k=k+converted(int(u[6*j:6*j+6],2))
-                    print(f"initial password {k} encrypted password {c}")
+                    print(f"\nYour message : \"{k}\" was encrypted as: \"{c}\"")
                 elif w == 1:
                     u=y.readline()
                     i=file.readline()
@@ -140,48 +135,53 @@ def out_tex():
                         c=c+converted(int(i[6*j:6*j+6],2))
                     for j in range(13):
                         k=k+converted(int(u[6*j:6*j+6],2))
-                    print(f"given password is {k} and its decrypted password is {c}")
+                    print(f"\nYour message : \"{k}\" was decrypted as:  \"{c}\"")
                 elif w == 2:
                     i=file.readline()
                     c=""
                     for j in range(10):
                         c=c+converted(int(i[6*j:6*j+6],2))
-                    print(f"passowrd generated is : {c}")
+                    print(f"\nA random passowrd generated is : \"{c}\"")
+
+
 print("Welcome")
-print("Encrypt file takes input file and encrypts it and genrate new.txt which is a encrypted file.")
-print("Decrypt file takes previously encrypted file and decrypts it and decrypted file is new_2.txt")
+print("Encrypt file takes input file and encrypts it and genrates .txt which conmtains encrypted data.")
+print("Decrypt file takes previously encrypted file and decrypts it and generates a .txt file")
 print("encrypt file currently supports following characters")
 print(r"     1) numbers (0-9)")
 print(r"     2) alphabets (a-z , A-Z)")
 print(r"     3) characters ('\n', ' ', '_', ',', '.')")
-print("Encrypt password supports password of length of 10 characters containing alphanumeric and _")
-print("Decrypt password decrypts previously encrypted password")
-print("Random data generator generates data of 10 characters consists alpha numeric characters and _ and spaces")
-x=int(input("Menu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt some passwords and generate some passwords of length upto 10\nPlease pick your choice: "))
-if(x==1):
-    TakeFileInput()
+print("Encrypting a message supports input of length of 10 characters containing alphanumeric and _")
+print("Decrypting a message decrypts a previously encrypted message ")
+print("Random password generator generates password of 10 characters consists alpha numeric characters and _ and spaces")
+TypeOfOperation=int(input("Menu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt a message and generate random passwords of length upto 10\nPlease pick your choice: "))
+if(TypeOfOperation==1):
+    inputFilePath=input("Enter path of file to be encrypted: ")
+    outFilePath=input("Enter path of file to store encrypted data: ")
+    TakeFileInput(inputFilePath)
     os.popen("vvp.exe a.out")
     time.sleep(1)
-    OutputFile(0)
-elif(x==2):
-    TakeFileInputDec()
+    OutputFile(0,outFilePath)
+    print(f"Your file \"{inputFilePath}\" was encrypted successfully and encrypted data is stored in \"{outFilePath}\"")
+elif(TypeOfOperation==2):
+    inputFilePath=input("Enter path of file to be decrypted: ")
+    outFilePath=input("Enter path of file to store decrypted data: ")
+    TakeFileInputDec(inputFilePath)
     os.popen("vvp.exe a.out")
     time.sleep(1)
-    OutputFile(1)
-elif(x==3):
-    try:
-        q=int(input("Enter number of operations: "))
-    except:
-        q=-1
-    if(q!=-1):
+    OutputFile(1,outFilePath)
+    print(f"Your file \"{inputFilePath}\" was decrypted successfully and decrypted data is stored in \"{outFilePath}\"")
+elif(TypeOfOperation==3):
+    numOfOp=int(input("Enter number of operations: "))
+    if(numOfOp>0):
         with open("my_file.txt", "w") as file:
-            file.write(str(q))
+            file.write(str(numOfOp))
             file.write("\n")
-            for i in range(q):
-                t=int(input("Select from following options:\n1: encrypt your password.(upto 10 characters)\n2: Decrypt your encrypted password.\n3: Generate a password\nSelect your choice:  "))
+            for i in range(numOfOp):
+                t=int(input("Select from following options:\n1: encrypt your message.(upto 10 characters)\n2: Decrypt a encrypted message.\n3: Generate a password\nSelect your choice:  "))
                 file.write(f"{t-1}\n")
                 if(t==1):
-                    t=input("Enter your password: ")
+                    t=input("Enter your message to be encrypted: ")
                     r=""
                     for x in t:
                         r=r+convert(x)
@@ -189,7 +189,7 @@ elif(x==3):
                     file.write(r)
                     file.write("\n")
                 if(t==2):
-                    t=input("Enter your password to be decrypted: ")
+                    t=input("Enter a encrypted message to be decrypted: ")
                     r=""
                     for x in t:
                         r=r+convert(x)
@@ -201,3 +201,6 @@ elif(x==3):
         out_tex()
 else:
     print("Invalid Input")
+
+os.remove("my_file.txt")
+os.remove("out_file.txt")
