@@ -49,8 +49,8 @@ def TakeFileInput():
     with open(inputFilePath, "r") as inputDataFile:
         dataAsString=inputDataFile.read()
         dataAsString=dataAsString.replace("\n","__________")
-        dataAsString=dataAsString.replace(".", "_________")
-        dataAsString=dataAsString.replace(",", "________")
+        dataAsString=dataAsString.replace(".", "0_00_0_0_0")
+        dataAsString=dataAsString.replace(",", "7__77_7_77")
         dataAsList=splitData(dataAsString)
         dataAsList=[convertWordToBinary(x) for x in dataAsList]
     with open("my_file.txt", "w") as inputDataFile:
@@ -60,7 +60,7 @@ def TakeFileInput():
             inputDataFile.write(f"0\n{x}\n")
 
 def TakeFileInputDec():
-    inputFilePath=input("Enter path of file to be decrypted")
+    inputFilePath=input("Enter path of file to be decrypted: ")
     with open(inputFilePath, "r") as inputDataFile:
         dataAsList = []
         dataAsString=inputDataFile.read()
@@ -110,8 +110,8 @@ def OutputFile(TypeOfOp):
             with open("new.txt", "r") as fout:
                 ans=fout.read()
             ans.replace("__________","\n")
-            ans.replace("_________",".")
-            ans.replace("________",",")
+            ans.replace("0_00_0_0_0",".")
+            ans.replace("7__77_7_77",",")
             with open("new.txt", "w") as fout:
                 fout.write(ans)
 
@@ -119,10 +119,8 @@ def out_tex():
     with open("out_file.txt", "r") as file:
         with open("my_file.txt", "r") as y:
             n=int(y.readline())
-            print(n)
             for i in range(n):
                 w=int(y.readline())
-                print(w)
                 if w == 0:
                     u=y.readline()
                     i=file.readline()
@@ -149,8 +147,17 @@ def out_tex():
                     for j in range(10):
                         c=c+converted(int(i[6*j:6*j+6],2))
                     print(f"passowrd generated is : {c}")
-
-x=int(input("Welcome\nMenu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt some passwords and generate some passwords of length upto 10"))
+print("Welcome")
+print("Encrypt file takes input file and encrypts it and genrate new.txt which is a encrypted file.")
+print("Decrypt file takes previously encrypted file and decrypts it and decrypted file is new_2.txt")
+print("encrypt file currently supports following characters")
+print(r"     1) numbers (0-9)")
+print(r"     2) alphabets (a-z , A-Z)")
+print(r"     3) characters ('\n', ' ', '_', ',', '.')")
+print("Encrypt password supports password of length of 10 characters containing alphanumeric and _")
+print("Decrypt password decrypts previously encrypted password")
+print("Random data generator generates data of 10 characters consists alpha numeric characters and _ and spaces")
+x=int(input("Menu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt some passwords and generate some passwords of length upto 10\nPlease pick your choice: "))
 if(x==1):
     TakeFileInput()
     os.popen("vvp.exe a.out")
@@ -171,7 +178,7 @@ elif(x==3):
             file.write(str(q))
             file.write("\n")
             for i in range(q):
-                t=int(input("Select from following options:\n1: encrypt your password.(upto 10 characters)\n2: Decrypt your encrypted password.\n3: Generate a password "))
+                t=int(input("Select from following options:\n1: encrypt your password.(upto 10 characters)\n2: Decrypt your encrypted password.\n3: Generate a password\nSelect your choice:  "))
                 file.write(f"{t-1}\n")
                 if(t==1):
                     t=input("Enter your password: ")
@@ -182,7 +189,7 @@ elif(x==3):
                     file.write(r)
                     file.write("\n")
                 if(t==2):
-                    t=input("Enter your password: ")
+                    t=input("Enter your password to be decrypted: ")
                     r=""
                     for x in t:
                         r=r+convert(x)
