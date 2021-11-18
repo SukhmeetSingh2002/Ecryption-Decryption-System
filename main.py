@@ -2,6 +2,7 @@ import os
 import time
 
 os.popen("iverilog.exe TestBench.v")
+time.sleep(1)
 
 def convert(x):
     if(ord(x)>=65 and ord(x)<=90):
@@ -66,7 +67,7 @@ def TakeFileInputDec():
         dataAsString=dataAsString.replace("\n","")
         dataAsString=dataAsString.replace(".", "")
         dataAsString=dataAsString.replace(",", "")
-        dataAsList=splitData(dataAsString,12);
+        dataAsList=splitData(dataAsString,13);
         dataAsList=[convertWordToBinary(x,78) for x in dataAsList]
     with open("my_file.txt", "w") as inputDataFile:
         inputDataFile.write(str(len(dataAsList)))
@@ -77,11 +78,12 @@ def TakeFileInputDec():
 def OutputFile(TypeOfOp):
     with open("out_file.txt", "r") as f:
         dataAsBinary=f.readlines()
+        c=[]
         if TypeOfOp==0:
             for i in dataAsBinary:
                 if i!='\n':
                     for j in range(13):
-                        c=c.append(list(converted(int(i[6*j:6*j+6],2))))
+                        c.append((converted(int(i[6*j:6*j+6],2))))
                 else:
                     c=c+list("\n")
             with open("new.txt", "w") as fout:
@@ -152,10 +154,12 @@ x=int(input("Welcome\nMenu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decryp
 if(x==1):
     TakeFileInput()
     os.popen("vvp.exe a.out")
+    time.sleep(1)
     OutputFile(0)
 elif(x==2):
     TakeFileInputDec()
     os.popen("vvp.exe a.out")
+    time.sleep(1)
     OutputFile(1)
 elif(x==3):
     try:
