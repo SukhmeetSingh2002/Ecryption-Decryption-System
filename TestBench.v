@@ -41,7 +41,7 @@ module TestBench ();
             if(w==0)begin
               ans = $fscanf(fd, "%b\n",InputDataRaw); 
               $display("%d",InputDataRaw);
-              #30
+              #20
               $fdisplay(fw,"%b",OutputDataEnc);
             end
             else if (w==1) begin

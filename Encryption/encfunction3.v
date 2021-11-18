@@ -7,7 +7,7 @@ module encrypt_function_3 (Clk,data_1,outEnc,rand_11,rand_6);
     reg [77:0]outEnc;
     reg [59:0]b;
     reg [60:0]x;
-    always @(data_1) begin
+    always @(posedge Clk) begin
         b[10:0]=~rand_11;
         b[21:11]=rand_11;
         b[32:22]=rand_11;
