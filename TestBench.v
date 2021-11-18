@@ -51,7 +51,7 @@ module TestBench ();
               $fdisplay(fw,"%b",OutputDataRaw);
             end
             else if (w==2) begin
-              #10
+              #20
               $fdisplay(fw,"%b",OutputDataRaw);
             end
           end
