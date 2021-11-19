@@ -1,9 +1,13 @@
 import os
 import time
 
-os.popen("iverilog.exe TestBench.v")
-time.sleep(1)
+#runs testbench and generates a.out 
+try:
+    os.popen("iverilog.exe TestBench.v")
+finally:
+    time.sleep(1)
 
+#helps to encode characters to binary
 def convert(x):
     if(ord(x)>=65 and ord(x)<=90):
         z=ord(x)-65+1
@@ -17,6 +21,7 @@ def convert(x):
         z=0
     return "{0:06b}".format(z)
 
+#decodes binary to characters
 def converted(x):
     if(x>=1 and x<=26):
         z=chr(x+65-1)
@@ -29,6 +34,8 @@ def converted(x):
     else:
         z=" "
     return z
+
+#converts strings of specified length to binary using above encoding 
 def convertWordToBinary(word,lenWord=60):
     binWord=""
     for x in word:
@@ -36,6 +43,7 @@ def convertWordToBinary(word,lenWord=60):
     binWord=binWord+"0"*(lenWord-len(binWord))
     return binWord
 
+#Used to split data into length of 10 or 13 based on encryption or decryption
 def splitData(dataString,lenWord=10):
     dataAsList = []
     while dataString:
@@ -44,6 +52,7 @@ def splitData(dataString,lenWord=10):
         dataString=dataString[lenWord:]
     return dataAsList
 
+#Used to take file to be encrypted as input and generates file with encoded binary data
 def TakeFileInput(inputFilePath):
     with open(inputFilePath, "r") as inputDataFile:
         dataAsString=inputDataFile.read()
@@ -58,6 +67,7 @@ def TakeFileInput(inputFilePath):
         for x in dataAsList:
             inputDataFile.write(f"0\n{x}\n")
 
+#Used to take encrypted file as input and generates a binary data file.
 def TakeFileInputDec(inputFilePath):
     with open(inputFilePath, "r") as inputDataFile:
         dataAsList = []
@@ -73,6 +83,7 @@ def TakeFileInputDec(inputFilePath):
         for x in dataAsList:
             inputDataFile.write(f"1\n{x}\n")
 
+#generates output file (encrypted / Decrypted)
 def OutputFile(TypeOfOp,outFileName):
     with open("out_file.txt", "r") as f:
         dataAsBinary=f.readlines()
@@ -110,6 +121,7 @@ def OutputFile(TypeOfOp,outFileName):
             with open(outFileName, "w") as fout:
                 fout.write(ans)
 
+#generates output for input given from console
 def out_tex():
     with open("out_file.txt", "r") as file:
         with open("my_file.txt", "r") as y:
@@ -135,7 +147,7 @@ def out_tex():
                         c=c+converted(int(i[6*j:6*j+6],2))
                     for j in range(13):
                         k=k+converted(int(u[6*j:6*j+6],2))
-                    print(f"\nYour message : \"{k}\" was decrypted as:  \"{c}\"")
+                    print(f"\nYour message : \"{k}\" was decrypted as:  \"{c.strip()}\"")
                 elif w == 2:
                     i=file.readline()
                     c=""
@@ -151,7 +163,7 @@ print("encrypt file currently supports following characters")
 print(r"     1) numbers (0-9)")
 print(r"     2) alphabets (a-z , A-Z)")
 print(r"     3) characters ('\n', ' ', '_', ',', '.')")
-print("Encrypting a message supports input of length of 10 characters containing alphanumeric and _")
+print("Encrypting a message supports input of length of 10 characters containing alphanumeric and _ characters")
 print("Decrypting a message decrypts a previously encrypted message ")
 print("Random password generator generates password of 10 characters consists alpha numeric characters and _ and spaces")
 TypeOfOperation=int(input("Menu:\n1: Encrypt file\n2: Decrypt file\n3: Encrypt/Decrypt a message and generate random passwords of length upto 10\nPlease pick your choice: "))
@@ -202,5 +214,6 @@ elif(TypeOfOperation==3):
 else:
     print("Invalid Input")
 
+#deletes intermediate files sent and recieved from verilog.
 os.remove("my_file.txt")
 os.remove("out_file.txt")

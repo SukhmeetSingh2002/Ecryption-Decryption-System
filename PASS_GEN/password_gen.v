@@ -16,11 +16,11 @@ module Password_Gen(Clk,output_2_80);
     Gen_4 FNC4(Clk,output_2_80_INTERNAL_4); 
 
     always @(posedge Clk) begin
-        if(Random_6<4)
+        if(Random_6<16)
             output_2_80=output_2_80_INTERNAL_1;
-        else if(Random_6<8)
+        else if(Random_6<32)
             output_2_80=output_2_80_INTERNAL_2;
-        else if(Random_6<12)
+        else if(Random_6<48)
             output_2_80=output_2_80_INTERNAL_3;
         else
             output_2_80=output_2_80_INTERNAL_4;
