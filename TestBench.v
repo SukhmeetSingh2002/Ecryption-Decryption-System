@@ -66,7 +66,7 @@ module TestBench ();
         #5 Clk=~Clk;
     initial 
 	  begin 
-	    $dumpfile("ha.vcd");
+	    $dumpfile("Enc-Dec.vcd");
 	    $dumpvars;
 	  end
 endmodule
