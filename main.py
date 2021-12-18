@@ -1,11 +1,14 @@
 import os
 import time
+import subprocess
 
 #runs testbench and generates a.out 
-try:
-    os.popen("iverilog.exe TestBench.v")
-finally:
-    time.sleep(1)
+t=subprocess.Popen("iverilog.exe TestBench.v")
+t.wait()
+
+if t.returncode!=0:
+    print("Error")
+    exit(0)
 
 #helps to encode characters to binary
 def convert(x):
@@ -171,18 +174,32 @@ if(TypeOfOperation==1):
     inputFilePath=input("Enter path of file to be encrypted: ")
     outFilePath=input("Enter path of file to store encrypted data: ")
     TakeFileInput(inputFilePath)
-    os.popen("vvp.exe a.out")
-    time.sleep(1)
+
+    tt=subprocess.Popen("vvp.exe a.out",stdout=subprocess.DEVNULL)
+    tt.wait()
+
     OutputFile(0,outFilePath)
-    print(f"Your file \"{inputFilePath}\" was encrypted successfully and encrypted data is stored in \"{outFilePath}\"")
+    
+    if t.returncode==0:
+        print(f"Your file \"{inputFilePath}\" was encrypted successfully and encrypted data is stored in \"{outFilePath}\"")
+    else:
+        print("Error")
+        exit(0)
 elif(TypeOfOperation==2):
     inputFilePath=input("Enter path of file to be decrypted: ")
     outFilePath=input("Enter path of file to store decrypted data: ")
     TakeFileInputDec(inputFilePath)
-    os.popen("vvp.exe a.out")
-    time.sleep(1)
+
+    tt=subprocess.Popen("vvp.exe a.out",stdout=subprocess.DEVNULL)
+    tt.wait()
+
     OutputFile(1,outFilePath)
-    print(f"Your file \"{inputFilePath}\" was decrypted successfully and decrypted data is stored in \"{outFilePath}\"")
+
+    if t.returncode==0:
+        print(f"Your file \"{inputFilePath}\" was decrypted successfully and decrypted data is stored in \"{outFilePath}\"")
+    else:
+        print("Error")
+        exit(0)
 elif(TypeOfOperation==3):
     numOfOp=int(input("Enter number of operations: "))
     if(numOfOp>0):
@@ -208,9 +225,13 @@ elif(TypeOfOperation==3):
                     r="0"*(60-len(r))+r
                     file.write(r)
                     file.write("\n")    
-        os.popen("vvp.exe a.out")
-        time.sleep(1)
-        out_tex()
+        t=subprocess.Popen("vvp.exe a.out",stdout=subprocess.DEVNULL)
+        t.wait()
+        if t.returncode==0:
+            out_tex()
+        else:
+            print("Error")
+            exit(0)
 else:
     print("Invalid Input")
 

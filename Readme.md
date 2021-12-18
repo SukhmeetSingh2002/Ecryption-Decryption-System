@@ -31,7 +31,7 @@ python main.py
 - These characters are taken together and written in a file specified by the user
 
 ### Decryption
-- Data is grouped in a length of 12 characters
+- Data is grouped in a length of 13 characters
 - Two characters extra help to decrypt it using the reverse computations 
 - The decrypt data is written in a file specified by the user
 ### Password Generation
